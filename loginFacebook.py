@@ -1,16 +1,16 @@
 from selenium import webdriver
 import time
 
-driver = webdriver.Chrome('C:\Program Files\Google\Chrome\Application\chromedriver.exe')
+driver = webdriver.Chrome('X:\caminho\do\chromedriver.exe')
 driver.maximize_window()
 url = 'https://www.facebook.com/'
 driver.get(url)
 
-usr = 'joaognrlies@hotmail.com'
-psw = '19841986ironmaidensomewhereintime'
+usr = 'seu@email.com'
+psw = 'suasenha'
 
-email = driver.find_element_by_xpath('//*[@id="email"]')#.send_keys(usr)
-senha = driver.find_element_by_xpath('//*[@id="pass"]')#.send_keys(psw)
+email = driver.find_element_by_xpath('//*[@id="email"]')
+senha = driver.find_element_by_xpath('//*[@id="pass"]')
 
 try:
     #Se o elemento selecionado estiver habilitado ou visível, deverá ser possível digitar o email do usuário

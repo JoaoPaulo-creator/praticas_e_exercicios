@@ -50,6 +50,8 @@ try:
             logradouro.send_keys(b)
             time.sleep(1)
             driver.find_element_by_id('btn_pesquisar').click()
+            time.sleep(1)
+            driver.quit()
 
         
 

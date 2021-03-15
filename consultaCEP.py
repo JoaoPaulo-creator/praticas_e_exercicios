@@ -42,7 +42,8 @@ try:
         #Se o logradouro informado possuir menos de dois caracteres, novamente será apresentado uma mensagem e novegador será fechado (não pensei em nada melhor a ser feito)
         if len(b) < 2:
             print('O logradouro  possui menos de 2 caracteres')
-            driver.quit()
+            time.sleep(3)
+            driver.get('https://buscacepinter.correios.com.br/app/endereco/index.php?t')
         else:
             #Senão, dessa vez será possível efetuar a consulta
             time.sleep(1)
@@ -58,22 +59,4 @@ try:
 except:
     print('Não funcionou')
     time.sleep(2)
-
-
-
-
-
-'''
-Isso tudo aqui em baixo é lixo
-
-try:
-    time.sleep(1)
-    msg_alerta = driver.find_element_by_class_name('msg')
-    if msg_alerta.is_enabled() or msg_alerta.is_displayed():
-        driver.refresh()
-
-except:
-    print('Não funcionou')
-    time.sleep(5)
-    driver.quit()
-'''
+    

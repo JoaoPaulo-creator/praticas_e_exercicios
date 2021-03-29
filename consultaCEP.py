@@ -30,7 +30,7 @@ driver.find_element_by_id('btn_pesquisar').click()
 try:
     #Se o endereço informado não cumprir com os requisitos, o código vai cair neste bloco try
     #Onde será realizado um novo processo de consulta 
-
+# NECESSÁRIO REALIZAR MANUTENÇÃO NESSA PARTE DO SCRIPT
     time.sleep(1)
     msg_alerta = driver.find_element_by_class_name('msg')
     if msg_alerta.is_enabled() or msg_alerta.is_displayed():

@@ -52,13 +52,14 @@ def msg_resultado():
 
     except NoSuchElementException:
         time.sleep(1)
+    finally:
         driver.quit()
 
 
 def msg_error():
     try:
 
-        msg_erro = driver.find_element_by_link_text('Não há dados a serem exibidos') #<- Necessário arrumar isso aqui
+        msg_erro = driver.find_element_by_link_text('Não há dados a serem exibidos')
         if msg_erro.is_displayed() or msg_erro.is_enabled():
             print('O endereço informado está incorreto')
 
@@ -74,7 +75,7 @@ menosDe2 = driver.find_element_by_css_selector('div.msg')
 # Essa variável é sobre a mensagem apresentada quando o endereço é consultado corretamente
 elemento = driver.find_element_by_id('mensagem-resultado')
 # Essa variável é sobre a mensagem apresentada quando o endereço informado está incorreto
-elemento_erro = driver.find_element_by_xpath('//*[@id="mensagem-resultado"]') #<- Necessário arrumar isso aqui
+elemento_erro = driver.find_element_by_xpath('//*[@id="mensagem-resultado"]')
 
 '======================================================================================================================'
 
@@ -83,7 +84,7 @@ if menosDe2.is_displayed():
     menorQue2carac()
 
 # Se o endereço informado for correto, então cairá nessa condição
-if elemento.is_displayed():
+elif elemento.is_displayed():
     msg_resultado()
 
 # Se o endereço informado for incorreto, então cairá nessa condição

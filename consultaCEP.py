@@ -43,7 +43,6 @@ def menorQue2carac():
         driver.quit()
 
 
-# Necessário arrumar
 def msg_resultado():
     try:
         message = driver.find_element_by_id('mensagem-resultado')
@@ -55,7 +54,7 @@ def msg_resultado():
     finally:
         driver.quit()
 
-
+# Necessário arrumar
 def msg_error():
     try:
 
@@ -75,7 +74,7 @@ menosDe2 = driver.find_element_by_css_selector('div.msg')
 # Essa variável é sobre a mensagem apresentada quando o endereço é consultado corretamente
 elemento = driver.find_element_by_id('mensagem-resultado')
 # Essa variável é sobre a mensagem apresentada quando o endereço informado está incorreto
-elemento_erro = driver.find_element_by_xpath('//*[@id="mensagem-resultado"]')
+elemento_erro = driver.find_element_by_xpath('//*[@id="mensagem-resultado"]') #<- Necessário arrumar
 
 '======================================================================================================================'
 

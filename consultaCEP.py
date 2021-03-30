@@ -1,19 +1,18 @@
 from selenium import webdriver
-from selenium.webdriver.support.ui import Select #a utilização deste método é viável para selecionar um determinado valor ou uma opção que fica dentro de um dropdown list
+from selenium.webdriver.support.ui import Select  # a utilização deste método é viável para selecionar um determinado valor ou uma opção que fica dentro de um dropdown list
 import time
+from selenium.common.exceptions import NoSuchElementException
 
-
-driver = webdriver.Firefox()
+driver = webdriver.Chrome('C:\Program Files\Google\Chrome\Application\chromedriver.exe')
 driver.maximize_window()
 driver.get('https://buscacepinter.correios.com.br/app/endereco/index.php?t')
 
-
-#Digitando o endereço no campo "Digite um CEP ou um Endereço:"
+# Digitando o endereço no campo "Digite um CEP ou um Endereço:"
 logradouro = driver.find_element_by_id('endereco')
-#logradouro.send_keys('Rua Antonio Rogerio da Silva Rosa')
-a = 'a'
+a = 'Nome da Rua'
+time.sleep(0.8)
+logradouro.clear()
 logradouro.send_keys(a)
-
 
 # As linhas abaixo servem para selecionar uma opção do campo "Esse CEP é de:"
 time.sleep(1)
@@ -22,41 +21,49 @@ select.select_by_index(0)
 time.sleep(2)
 select.select_by_visible_text('Localidade/Logradouro')
 
-
-#Buscando o CEP digitado
+# Buscando o CEP digitado
 time.sleep(1)
 driver.find_element_by_id('btn_pesquisar').click()
+time.sleep(1)
 
-try:
-    #Se o endereço informado não cumprir com os requisitos, o código vai cair neste bloco try
-    #Onde será realizado um novo processo de consulta 
-# NECESSÁRIO REALIZAR MANUTENÇÃO NESSA PARTE DO SCRIPT
-    time.sleep(1)
-    msg_alerta = driver.find_element_by_class_name('msg')
-    if msg_alerta.is_enabled() or msg_alerta.is_displayed():
-        print('O endereço informando possui menos de dois caracteres ou está incorreto')
+
+#Funções para validar se a consulta foi realizada conforme o esperado
+def menorque2carac():
+    try:
+        mensagem = driver.find_element_by_class_name('msg')
+        if mensagem.is_enabled() or mensagem.is_enabled():
+            print('O logradouro informado possui menos de 2 caracteres')
+    except NoSuchElementException:
         time.sleep(1)
-        driver.refresh()
 
-        b = str(input('Informe um novo nome de rua: '))
-        #Se o logradouro informado possuir menos de dois caracteres, novamente será apresentado uma mensagem e novegador será fechado (não pensei em nada melhor a ser feito)
-        if len(b) < 2:
-            print('O logradouro  possui menos de 2 caracteres')
-            time.sleep(3)
-            driver.get('https://buscacepinter.correios.com.br/app/endereco/index.php?t')
-        else:
-            #Senão, dessa vez será possível efetuar a consulta
-            time.sleep(1)
-            logradouro = driver.find_element_by_id('endereco')
-            logradouro.send_keys(b)
-            time.sleep(1)
-            driver.find_element_by_id('btn_pesquisar').click()
-            time.sleep(1)
-            driver.quit()
 
-        
+def msg():
+    try:
+        message = driver.find_element_by_id('mensagem-resultado')
+        if message.is_displayed() or message.is_enabled():
+            print('O endereço foi consultado conforme o esperado')
 
-except:
-    print('Não funcionou')
-    time.sleep(2)
-    
+    finally:
+        pass
+
+
+def msg_error():
+    try:
+
+        msg_erro = driver.find_element_by_id('')
+        if msg_erro.is_displayed() or msg_erro.is_enabled():
+            print('O endereço informado está incorreto')
+
+    finally:
+        pass
+
+
+elemento = driver.find_element_by_id('mensagem-resultado')
+#elemento_erro = driver.find_element_by_id('')
+
+if elemento.is_displayed() or elemento.is_enabled():
+    msg()
+
+'''elif elemento_erro.is_enabled() or elemento_erro.is_displayed():
+    msg_error()
+'''

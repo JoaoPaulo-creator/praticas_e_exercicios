@@ -9,7 +9,7 @@ driver.get('https://buscacepinter.correios.com.br/app/endereco/index.php?t')
 '======================================================================================================================'
 # Digitando o endereço no campo "Digite um CEP ou um Endereço:"
 logradouro = driver.find_element_by_id('endereco')
-a = 'Antonio Rogerio da Silva Rosa'
+a = 'Nome da Rua'
 time.sleep(0.8)
 logradouro.clear()
 logradouro.send_keys(a)
